@@ -1,0 +1,63 @@
+package com.mydating.dating.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import com.mydating.dating.DatingApplication;
+import com.mydating.dating.entity.User;
+import com.mydating.dating.service.UserService;
+
+@RestController
+public class UserController {
+
+
+	@Autowired
+	UserService userService;
+
+   
+
+	@PostMapping("/users")
+	public ResponseEntity<?> saveUser(@RequestBody User user){
+		return userService.saveUser(user);
+	}
+	
+	
+	@GetMapping("/users/gender/male")
+	public ResponseEntity<?> findAllMaleUsers(){
+		return userService.findAllMaleUsers();
+		
+	}
+	
+	
+	@GetMapping("/users/gender/female")
+	public ResponseEntity<?> findAllFemaleUsers(){
+		return userService.findAllFemaleUsers();
+	}
+	
+
+	
+	@GetMapping("/users/best-match/{id}/{top}")
+	public ResponseEntity<?> findBestMatch(@PathVariable int id, @PathVariable int top){
+		return userService.findBestMatch(id,top);
+	}
+	
+	@GetMapping("/users/name/{name}")
+	public ResponseEntity<?> findUserName(@PathVariable String name){
+		return userService.findUserName(name);
+	}
+	
+	@GetMapping("/users/email/{email}")
+	public ResponseEntity<?> findUserEmail(@PathVariable String email){
+		return userService.findUserEmail(email);
+	}
+	
+	
+	@GetMapping("/users/age/{age}")
+	public ResponseEntity<?> findUserAge(@PathVariable int age){
+		return userService.findUserAge(age);
+	}
+}
