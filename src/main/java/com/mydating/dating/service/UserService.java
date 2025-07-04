@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.mydating.dating.dao.UserDao;
@@ -29,6 +30,7 @@ public class UserService {
 		return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
 	}
 
+	
 	public ResponseEntity<?> findAllMaleUsers() {
 		List<User> maleUsers = userDao.findAllMaleUsers();
 		if(maleUsers.isEmpty()) {
@@ -114,6 +116,11 @@ public class UserService {
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 
+	
+	
+	
+	
+	
 	public ResponseEntity<?> findUserName(String name) {
 		Optional<User> optional = userDao.findUserName(name);
 		if(optional.isEmpty()) {
@@ -138,6 +145,26 @@ public class UserService {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(optional);
 		}else {
 			return ResponseEntity.status(HttpStatus.OK).body(optional);
+		}
+	}
+
+
+	public ResponseEntity<?> searchByName(String letters) {
+		List<User> users = userDao.searchByName("%"+letters+"%");
+		if(users.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No User Found with Letters:"+letters);
+		}else {
+			return ResponseEntity.status(HttpStatus.OK).body(users);
+		}
+	}
+
+
+	public ResponseEntity<?> searchByEmail(String letters) {
+		List<User> all = userDao.searchByEmail("%"+letters+"%");
+		if(all.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No User Found with Letters:"+letters);
+		}else {
+			return ResponseEntity.status(HttpStatus.OK).body(all);
 		}
 	}
 }

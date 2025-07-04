@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.mydating.dating.DatingApplication;
 import com.mydating.dating.entity.User;
 import com.mydating.dating.service.UserService;
 
@@ -59,5 +58,18 @@ public class UserController {
 	@GetMapping("/users/age/{age}")
 	public ResponseEntity<?> findUserAge(@PathVariable int age){
 		return userService.findUserAge(age);
+	}
+	
+	
+	
+	@GetMapping("/users/search/name/{letters}")
+	public ResponseEntity<?> searchByName(@PathVariable String letters){
+		return userService.searchByName(letters);
+	}
+	
+	
+	@GetMapping("users/search/email/{letters}")
+	public ResponseEntity<?> searchByEmail(@PathVariable String letters){
+		return userService.searchByEmail(letters);
 	}
 }

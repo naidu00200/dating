@@ -10,7 +10,7 @@ public  class UserSorting implements Comparator<MatchingUser> {
 	public int compare(MatchingUser o1, MatchingUser o2) {
 		if(o1.getAgeDiff() < o2.getAgeDiff()) {
 			return -1;
-		}else if(o1.getAgeDiff() > o2.getAgeDiff()) {
+		}else if(o1.getAgeDiff() > o2.getAgeDiff()) { 
 			return 1;
 		}else if(o1.getAgeDiff() == o2.getAgeDiff()) {
 			
